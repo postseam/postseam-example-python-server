@@ -20,11 +20,21 @@ unit_test:
 coverage:unit_test
 	python -m coverage report --omit='pb/*','test/*'
 
-build_local:
+build_docker:
 	docker build -t postseam-example-python-server . 
 
-run_local:
-	docker run -it -p 8000:8000 postseam-example-python-server:latest
+run_docker:
+	docker run -it -p 8000:8000 -p 5432:5432 postseam-example-python-server:latest
 
 test_docker:
 	docker run postseam-example-python-server:latest make unit_test
+
+postgres_docker:
+	docker run \
+    -p 5432:5432 \
+    -e POSTGRES_USER=user \
+    -e POSTGRES_PASSWORD=password \
+    -e POSTGRES_DB=postseam \
+	-e POSTGRES_HOST_AUTH_METHOD=trust \
+    -v /var/lib/postgres/data:/var/lib/postgres/data \
+	-it postgres
