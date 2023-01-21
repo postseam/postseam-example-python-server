@@ -1,5 +1,9 @@
-grpcio 
+grpcio
 grpcio-tools
+sqlalchemy
+psycopg2-binary
 
-# Testing requirements
+# Testing & dev requirements
+mock
 coverage
+pre-commit
