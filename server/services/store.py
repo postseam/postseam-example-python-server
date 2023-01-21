@@ -44,7 +44,9 @@ class StoreService(StoreServiceServicer):
 
         # get the string from the incoming request
         store = Store(
-            id=request.id, email=request.email, business_name=request.business_name,
+            id=request.id, 
+            email=request.email, 
+            business_name=request.business_name,
         )
 
         return store
