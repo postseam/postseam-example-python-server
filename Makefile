@@ -24,7 +24,7 @@ build_docker:
 	docker build -t postseam-example-python-server . 
 
 run_docker:
-	docker run -it -p 8000:8000 postseam-example-python-server:latest
+	docker run --network="host"  -it -p 8000:8000 postseam-example-python-server:latest
 
 test_docker:
 	docker run postseam-example-python-server:latest make unit_test
