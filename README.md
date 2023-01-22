@@ -42,8 +42,7 @@ make test_docker
 
 ## Running the server
 
-You'll need to start a local instance of Postgres and the backend server to the application
-working correctly. The following command will help you get setup.
+You'll need to start a local instance of Postgres and the backend server to get the application working correctly. The following command will help you get setup.
 
 ### Postgres setup
 
