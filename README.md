@@ -65,7 +65,7 @@ Note, the following command builds the image and connects
 it with the Postgres image we started above.
 
 ```bash
-make build_docker && run_docker
+make build_docker && make run_docker
 
 ```
 
