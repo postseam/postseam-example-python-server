@@ -4,14 +4,44 @@
 #
 #    pip-compile --output-file=requirements.txt
 #
+aiohttp==3.8.3
+    # via cloud-sql-python-connector
+aiosignal==1.3.1
+    # via aiohttp
+asn1crypto==1.5.1
+    # via scramp
+async-timeout==4.0.2
+    # via aiohttp
+attrs==22.2.0
+    # via aiohttp
+cachetools==5.3.0
+    # via google-auth
+certifi==2022.12.7
+    # via requests
+cffi==1.15.1
+    # via cryptography
 cfgv==3.3.1
     # via pre-commit
+charset-normalizer==2.1.1
+    # via
+    #   aiohttp
+    #   requests
+cloud-sql-python-connector[pg8000]==1.1.0
+    # via -r requirements.in
 coverage==7.0.5
     # via -r requirements.in
+cryptography==39.0.0
+    # via cloud-sql-python-connector
 distlib==0.3.6
     # via virtualenv
 filelock==3.9.0
     # via virtualenv
+frozenlist==1.3.3
+    # via
+    #   aiohttp
+    #   aiosignal
+google-auth==2.16.0
+    # via cloud-sql-python-connector
 greenlet==2.0.1
     # via sqlalchemy
 grpcio==1.51.1
@@ -22,10 +52,20 @@ grpcio-tools==1.51.1
     # via -r requirements.in
 identify==2.5.13
     # via pre-commit
+idna==3.4
+    # via
+    #   requests
+    #   yarl
 mock==5.0.1
     # via -r requirements.in
+multidict==6.0.4
+    # via
+    #   aiohttp
+    #   yarl
 nodeenv==1.7.0
     # via pre-commit
+pg8000==1.29.4
+    # via cloud-sql-python-connector
 platformdirs==2.6.2
     # via virtualenv
 pre-commit==2.21.0
@@ -34,12 +74,38 @@ protobuf==4.21.12
     # via grpcio-tools
 psycopg2-binary==2.9.5
     # via -r requirements.in
+pyasn1==0.4.8
+    # via
+    #   pyasn1-modules
+    #   rsa
+pyasn1-modules==0.2.8
+    # via google-auth
+pycparser==2.21
+    # via cffi
+python-dateutil==2.8.2
+    # via pg8000
+python-dotenv==0.21.1
+    # via -r requirements.in
 pyyaml==6.0
     # via pre-commit
+requests==2.28.2
+    # via cloud-sql-python-connector
+rsa==4.9
+    # via google-auth
+scramp==1.4.4
+    # via pg8000
+six==1.16.0
+    # via
+    #   google-auth
+    #   python-dateutil
 sqlalchemy==1.4.46
     # via -r requirements.in
+urllib3==1.26.14
+    # via requests
 virtualenv==20.17.1
     # via pre-commit
+yarl==1.8.2
+    # via aiohttp
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
