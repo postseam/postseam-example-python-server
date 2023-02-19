@@ -1,0 +1,17 @@
+name: Postseam Example Python Server - Local build & test
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      run: make build_docker
+    - name: Run test in the Docker image
+      run: make test_docker
