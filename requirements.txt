@@ -129,6 +129,8 @@ protobuf==4.21.12
     #   grpcio-status
     #   grpcio-tools
     #   proto-plus
+psycopg2-binary==2.9.5
+    # via -r requirements.in
 pyasn1==0.4.8
     # via
     #   pyasn1-modules
