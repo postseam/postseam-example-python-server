@@ -4,19 +4,13 @@ import grpc
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-# Importing store model used requests.
 from pb.postseam.example.v1.store_pb2 import Store
-
-# Import request and response objects
-from pb.postseam.example.v1.store_service_pb2 import GetStoreRequest
 from pb.postseam.example.v1.store_service_pb2 import CreateStoreRequest
-
-# gRPC store service base class. 
+from pb.postseam.example.v1.store_service_pb2 import GetStoreRequest
 from pb.postseam.example.v1.store_service_pb2_grpc import StoreServiceServicer
-
-# Database imports
 from server.db.store_model import StoreModel
 from server.db.util import get_engine
+from server.util.helper import validate_firebase
 
 
 logger = logging.getLogger(__name__)
@@ -26,6 +20,12 @@ class StoreService(StoreServiceServicer):
     def CreateStore(
         self, request: CreateStoreRequest, context: grpc.ServicerContext
     ) -> Store:
+
+        if validate_firebase(context) is None:
+            logger.warn("Firebase token not verified.")
+            context.set_code(grpc.StatusCode.FAILED_PRECONDITION)
+            context.set_details("Firebase token not verified.")
+            return Store()
 
         logger.info("Request for CreateStore")
         engine = get_engine()
@@ -44,9 +44,7 @@ class StoreService(StoreServiceServicer):
 
         # get the string from the incoming request
         store = Store(
-            id=request.id, 
-            email=request.email, 
-            business_name=request.business_name,
+            id=request.id, email=request.email, business_name=request.business_name,
         )
 
         return store
@@ -54,6 +52,11 @@ class StoreService(StoreServiceServicer):
     def GetStore(
         self, request: GetStoreRequest, context: grpc.ServicerContext
     ) -> Store:
+        if validate_firebase(context) is None:
+            logger.warn("Firebase token not verified.")
+            context.set_code(grpc.StatusCode.FAILED_PRECONDITION)
+            context.set_details("Firebase token not verified.")
+            return Store()
 
         logger.info("Request for GerStore")
         engine = get_engine()

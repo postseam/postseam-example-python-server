@@ -15,9 +15,9 @@ generate_server:
 		./postseam-example-api/pb/postseam/example/v1/*.proto 
 
 unit_test:
-	python -m coverage run -m unittest
+	python -m unittest
 
-coverage:unit_test
+coverage: unit_test
 	python -m coverage report --omit='pb/*','test/*'
 
 build_docker:

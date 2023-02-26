@@ -1,18 +1,14 @@
 import unittest
+from unittest.mock import MagicMock
+
+import grpc
 import mock
 
-# Importing store model used requests.
 from pb.postseam.example.v1.store_pb2 import Store
-
-# Import request and response objects
-from pb.postseam.example.v1.store_service_pb2 import GetStoreRequest
 from pb.postseam.example.v1.store_service_pb2 import CreateStoreRequest
-
-# gRPC store service implementation 
-from server.services.store import StoreService
-
-# Database imports
+from pb.postseam.example.v1.store_service_pb2 import GetStoreRequest
 from server.db.store_model import StoreModel
+from server.services.store import StoreService
 
 
 def get_test_store_model():
@@ -30,10 +26,15 @@ class TestStoreService(unittest.TestCase):
             get_test_store_model()
         )
 
-    @mock.patch("server.services.store.get_engine")
-    def test_CreateStore(self, mock_engine):
-        """ Expect to get CreateStoreResponse """
+    def get_mock_firebase(self, mock_firebase):
+        mock_firebase.return_value = {}
 
+    @mock.patch("server.services.store.get_engine")
+    @mock.patch("server.services.store.validate_firebase")
+    def test_CreateStore(self, mock_firebase, mock_engine):
+        """ Expect to get Store response object """
+
+        self.get_mock_firebase(mock_firebase)
         # mocking some things
         mock_store_model = get_test_store_model()
 
@@ -53,11 +54,13 @@ class TestStoreService(unittest.TestCase):
 
     @mock.patch("server.services.store.get_engine")
     @mock.patch("server.services.store.Session")
-    def test_GetStore(self, mock_session, mock_engine):
-        """ Expect to get CreateStoreResponse """
+    @mock.patch("server.services.store.validate_firebase")
+    def test_GetStore(self, mock_firebase, mock_session, mock_engine):
+        """ Expect to get Store response object """
 
         # mocking some things
         self.get_mock_session(mock_session)
+        self.get_mock_firebase(mock_firebase)
         mock_store_model = get_test_store_model()
 
         request = GetStoreRequest(store_id=mock_store_model.id)

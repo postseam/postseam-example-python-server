@@ -1,9 +1,9 @@
 grpcio
 grpcio-tools
 sqlalchemy
-psycopg2-binary
 cloud-sql-python-connector[pg8000]
 python-dotenv
+firebase_admin
 
 # Testing & dev requirements
 mock
